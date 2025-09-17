@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <!-- <header class="topbar">
+        <h1>Presensi Karyawan</h1>
+        <nav>
+            <a href="/">Dashboard</a>
+            <a href="/karyawan">Data Karyawan</a>
+            <a href="/rekam-wajah">Rekam Wajah</a>
+            <a href="/absensi">Absensi</a>
+            <a href="/testing">Testing</a>
+        </nav>
+    </header>
+    <main class="container">
+        <%- body %>
+    </main>
+    <footer class="foot">&copy; <span id="year"></span> — Demo</footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script> -->
+    <!-- tes -->
+    <header class="topbar">
+        <button id="menuBtn" class="burger" aria-label="Toggle menu" aria-controls="drawer" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <h1>Presensi Karyawan</h1>
+        <nav class="topnav">
+            <a href="/">Dashboard</a>
+            <a href="/karyawan">Data Karyawan</a>
+            <a href="/rekam-wajah">Rekam Wajah</a>
+            <a href="/absensi">Absensi</a>
+            <a href="/testing">Testing</a>
+        </nav>
+    </header>
+
+    <!-- Tambah drawer + backdrop (baru) -->
+    <aside id="drawer" class="drawer" aria-hidden="true">
+        <div class="drawer-header">
+            <strong>Menu</strong>
+            <button id="closeDrawer" class="closebtn" aria-label="Close menu">×</button>
+        </div>
+        <nav class="drawernav">
+            <a href="/">Dashboard</a>
+            <a href="/karyawan">Data Karyawan</a>
+            <a href="/rekam-wajah">Rekam Wajah</a>
+            <a href="/absensi">Absensi</a>
+            <a href="/testing">Testing</a>
+        </nav>
+    </aside>
+    <div id="drawerBackdrop" class="backdrop" hidden></div>
+    <main class="container">
+        <%- body %>
+    </main>
+    <footer class="foot">&copy; <span id="year"></span> — Demo</footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+    <script src="/public/js/ui.js" defer></script>
+</body>
+
+</html>

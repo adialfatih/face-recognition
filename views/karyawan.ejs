@@ -1,0 +1,52 @@
+<% layout('layout') %>
+    <h2>Data Karyawan</h2>
+    <form method="post" class="form-grid">
+        <input name="nrp" placeholder="NRP" required />
+        <input name="nama" placeholder="Nama" required />
+        <select name="jenis_kelamin">
+            <option value="L">Laki-laki</option>
+            <option value="P">Perempuan</option>
+        </select>
+        <input name="departemen" placeholder="Departemen" />
+        <input name="divisi" placeholder="Divisi" />
+        <input name="jabatan" placeholder="Jabatan" />
+        <button type="submit">Simpan</button>
+    </form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NRP</th>
+                <th>Nama</th>
+                <th>JK</th>
+                <th>Departemen</th>
+                <th>Divisi</th>
+                <th>Jabatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% rows.forEach(r=> { %>
+                <tr>
+                    <td>
+                        <%= r.nrp %>
+                    </td>
+                    <td>
+                        <%= r.nama %>
+                    </td>
+                    <td>
+                        <%= r.jenis_kelamin %>
+                    </td>
+                    <td>
+                        <%= r.departemen %>
+                    </td>
+                    <td>
+                        <%= r.divisi %>
+                    </td>
+                    <td>
+                        <%= r.jabatan %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
