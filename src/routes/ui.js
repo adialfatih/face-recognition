@@ -37,10 +37,6 @@ router.get('/absensi/capture', (req, res) => res.render('absensi-capture', { typ
 
 
 
-// router.get('/absensi', (req, res) => {
-//     res.render('absensi');
-// });
-
 
 router.get('/testing', (req, res) => {
     res.render('testing');

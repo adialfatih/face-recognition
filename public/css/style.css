@@ -114,7 +114,7 @@ a {
 .camwrap {
     position: relative;
     max-width: 720px;
-    aspect-ratio: 16/9;
+    height: calc(100vh - 350px);
     margin: 16px 0;
     border-radius: 16px;
     overflow: hidden;
@@ -296,12 +296,6 @@ video {
 
     .burger {
         display: inline-flex
-    }
-}
-
-@media (max-width: 900px) {
-    .cards {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 }
 

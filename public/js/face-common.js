@@ -22,6 +22,8 @@ const FaceCommon = (() => {
         await faceapi.nets.tinyFaceDetector.loadFromUri(url);
         await faceapi.nets.faceLandmark68Net.loadFromUri(url);
         await faceapi.nets.faceRecognitionNet.loadFromUri(url);
+        try { await faceapi.nets.ageGenderNet.loadFromUri(url); state.hasAgeGender = true; } catch (e) { console.warn('[face] ageGender missing'); }
+        try { await faceapi.nets.faceExpressionNet.loadFromUri(url); state.hasExpressions = true; } catch (e) { console.warn('[face] expression missing'); }
         state.modelsLoaded = true;
     }
 
@@ -87,6 +89,27 @@ const FaceCommon = (() => {
         ctx.stroke();
         ctx.restore();
     }
+    function drawLabel(ctx, box, lines, ok = true) {
+        if (!lines || !lines.length) return;
+        const padX = 10, padY = 8, gap = 4;
+        ctx.save();
+        ctx.font = '14px system-ui,Segoe UI,Roboto,Arial';
+        let w = 0; for (const ln of lines) w = Math.max(w, ctx.measureText(ln).width);
+        const totalH = lines.length * 16 + (lines.length - 1) * gap + padY * 2;
+        const totalW = w + padX * 2;
+        const x = box.x + (box.width - totalW) / 2;
+        const y = Math.max(8, box.y - totalH - 10);
+        const bg = ok ? 'rgba(16,163,74,0.9)' : 'rgba(220,38,38,0.9)';
+        ctx.beginPath();
+        ctx.roundRect ? ctx.roundRect(x, y, totalW, totalH, 10)
+            : (ctx.moveTo(x + 10, y), ctx.arcTo(x + totalW, y, x + totalW, y + totalH, 10),
+                ctx.arcTo(x + totalW, y + totalH, x, y + totalH, 10),
+                ctx.arcTo(x, y + totalH, x, y, 10), ctx.arcTo(x, y, x + totalW, y, 10), ctx.closePath());
+        ctx.fillStyle = bg; ctx.shadowBlur = 12; ctx.shadowColor = bg; ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.shadowBlur = 0;
+        let ty = y + padY + 12; for (const ln of lines) { ctx.fillText(ln, x + padX, ty); ty += 16 + gap; }
+        ctx.restore();
+    }
 
 
     function roundRect(ctx, x, y, w, h, r) {
@@ -99,13 +122,21 @@ const FaceCommon = (() => {
         ctx.closePath();
     }
     // Compute 128D descriptor for single face using TinyFaceDetector
+    // async function describeFace(videoEl) {
+    //     const det = await faceapi
+    //         .detectSingleFace(videoEl, new faceapi.TinyFaceDetectorOptions({ inputSize: 320, scoreThreshold: 0.5 }))
+    //         .withFaceLandmarks()
+    //         .withFaceDescriptor();
+    //     return det; // {detection, descriptor}
+    // }
     async function describeFace(videoEl) {
-        const det = await faceapi
-            .detectSingleFace(videoEl, new faceapi.TinyFaceDetectorOptions({ inputSize: 320, scoreThreshold: 0.5 }))
-            .withFaceLandmarks()
-            .withFaceDescriptor();
-        return det; // {detection, descriptor}
+        const opts = new faceapi.TinyFaceDetectorOptions({ inputSize: 320, scoreThreshold: 0.5 });
+        let q = faceapi.detectSingleFace(videoEl, opts).withFaceLandmarks().withFaceDescriptor();
+        if (state.hasAgeGender) q = q.withAgeAndGender();
+        if (state.hasExpressions) q = q.withFaceExpressions();
+        return await q; // bisa mengandung age, gender, expressions
     }
+
 
 
     function euclidean(a, b) {
@@ -120,5 +151,6 @@ const FaceCommon = (() => {
     }
 
 
-    return { state, loadModels, startCamera, drawFancyBox, describeFace, euclidean, average };
+    return { state, loadModels, startCamera, drawFancyBox, describeFace, euclidean, average, drawLabel };
+
 })();

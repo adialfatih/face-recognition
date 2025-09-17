@@ -39,11 +39,11 @@
                 const title = kar ? `${kar.nrp} — ${kar.nama}` : best.nrp;
                 const jab = kar ? (kar.jabatan || '') : '';
                 badge.className = 'badge ok';
-                badge.textContent = `✔ ${title}`;
+                badge.textContent = `✅ ${title}`;
                 info.textContent = `${jab ? `Jabatan: ${jab} — ` : ''}Jarak: ${best.dist.toFixed(3)}`;
             } else {
                 badge.className = 'badge err';
-                badge.textContent = '✖ Tidak dikenali';
+                badge.textContent = '🚫 Tidak dikenali';
                 info.textContent = '';
             }
         } else {
