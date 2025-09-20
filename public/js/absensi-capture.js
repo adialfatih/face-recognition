@@ -53,7 +53,7 @@
                         const r = await fetch('/api/absen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nrp: best.nrp, shift: TYPE }) });
                         if (r.status === 409) {
                             const j = await r.json();
-                            Swal.fire('Sudah absen', `${best.nrp} sudah absen untuk ${j.shift} (${j.tanggal})`, 'info');
+                            //Swal.fire('Sudah absen', `${best.nrp} sudah absen untuk ${j.shift} (${j.tanggal})`, 'info');
                         } else {
                             const j = await r.json();
                             if (j.ok) Swal.fire('Berhasil', `${best.nrp} absen ${TYPE}`, 'success');
