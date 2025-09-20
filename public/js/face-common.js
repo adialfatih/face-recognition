@@ -134,8 +134,9 @@ const FaceCommon = (() => {
         let q = faceapi.detectSingleFace(videoEl, opts).withFaceLandmarks().withFaceDescriptor();
         if (state.hasAgeGender) q = q.withAgeAndGender();
         if (state.hasExpressions) q = q.withFaceExpressions();
-        return await q; // bisa mengandung age, gender, expressions
+        return await q;
     }
+
 
 
 

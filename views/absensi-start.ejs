@@ -1,6 +1,6 @@
 <% layout('layout') %>
     <h2>Absensi</h2>
-    <div class="panel">
+    <!-- <div class="panel">
         <label for="type">Pilih Tipe/Shift:</label>
         <select id="type">
             <option value="GS">Absensi GS</option>
@@ -9,6 +9,68 @@
             <option value="Shift Malam">Shift Malam</option>
         </select>
         <button id="btnGo">Mulai Absensi</button>
+    </div> -->
+    <div class="panel rows">
+        <div class="col">
+            Presensi DS : 07.00 - 15.00
+        </div>
+        <div class="cols">
+            <button id="inGS7" class="greenbtn">Absensi Masuk</button>
+            <button id="outGS7" class="redbtn">Absensi Pulang</button>
+        </div>
+    </div>
+    <div class="panel rows mt-10">
+        <div class="col">
+            Presensi DS : 08.00 - 16.00
+        </div>
+        <div class="cols">
+            <button id="inGS8" class="greenbtn">Absensi Masuk</button>
+            <button id="outGS8" class="redbtn">Absensi Pulang</button>
+        </div>
+    </div>
+    <div class="panel rows mt-10">
+        <div class="col">
+            Shift Pagi
+        </div>
+        <div class="cols">
+            <button id="in6">Absensi Masuk</button>
+            <button id="out14" class="redbtn">Absensi Pulang</button>
+        </div>
+    </div>
+    <div class="panel rows mt-10">
+        <div class="col">
+            Shift Siang
+        </div>
+        <div class="cols">
+            <button id="in14">Absensi Masuk</button>
+            <button id="out22" class="redbtn">Absensi Pulang</button>
+        </div>
+    </div>
+    <div class="panel rows mt-10">
+        <div class="col">
+            Shift Malam
+        </div>
+        <div class="cols">
+            <button id="in22">Absensi Masuk</button>
+            <button id="out6" class="redbtn">Absensi Pulang</button>
+        </div>
+    </div>
+    <div class="panel rows mt-10">
+        <div class="col">
+            Absensi Khusus
+        </div>
+        <div class="cols">
+            <button id="ijinkeluar" class="redbtn">Ijin Keluar</button>
+            <button id="ijinmasuk" class="greenbtn">Ijin Masuk</button>
+        </div>
+        <div class="cols">
+            <button id="inscr">Security Masuk</button>
+            <button id="outscr" class="redbtn">Security Pulang</button>
+        </div>
+        <div class="cols">
+            <button id="indrv">Driver Masuk</button>
+            <button id="outdrv" class="redbtn">Driver Pulang</button>
+        </div>
     </div>
     <p class="muted">Setelah klik, kamera akan tampil penuh dan absen otomatis saat wajah dikenali.</p>
     <script src="/public/js/absensi-start.js" defer></script>

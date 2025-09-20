@@ -23,3 +23,15 @@ POST /api/absen (simpan presensi; 409 jika sudah absen pada (nrp, tanggal, shift
 Public JS: face-common.js, rekam-start.js, rekam-capture.js, absensi-start.js, absensi-capture.js, ui.js (drawer).
 
 CSS: style dasar + fullscreen camera (fit ujung rambut–leher).
+
+```bash 
+PORT=3001
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASS=adicanting
+DB_NAME=presensi_db
+# FACE MATCH THRESHOLD (0.5-0.6 recommended)
+FACE_MATCH_THRESHOLD=0.55
+```
+

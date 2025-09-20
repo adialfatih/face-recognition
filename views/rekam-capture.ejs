@@ -15,7 +15,8 @@
             border-radius: 999px;
             backdrop-filter: saturate(140%) blur(2px);
             z-index: 12;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .3)
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+            color: #fff;
         }
 
         .fs-hud .rec-dot {
@@ -52,33 +53,16 @@
             box-shadow: 0 0 12px rgba(34, 197, 94, .9);
             animation: none
         }
-
-        /* In-page debug console (toggle dengan dblclick HUD) */
-        .fs-debug {
-            position: fixed;
-            right: 10px;
-            bottom: 10px;
-            max-width: 60vw;
-            max-height: 35vh;
-            overflow: auto;
-            background: rgba(0, 0, 0, .6);
-            color: #fff;
-            font: 12px/1.4 ui-monospace, Menlo, monospace;
-            padding: 8px 10px;
-            border-radius: 8px;
-            z-index: 13;
-            display: none
-        }
-
-        .fs-debug.show {
-            display: block
-        }
     </style>
     <div class="fullscreen">
         <div class="camfs">
-            <video id="video" autoplay muted playsinline></video>
-            <!-- penting: biar tombol bisa diklik di HP, canvas tidak menangkap touch -->
-            <canvas id="overlay" style="pointer-events:none"></canvas>
+            <!-- ganti elemen video jadi: -->
+            <video id="video" autoplay muted playsinline
+                style="position:absolute;left:0;top:0;z-index:1;width:100vw;height:100svh;height:100vh;object-fit:cover;"></video>
+
+
+            <canvas id="overlay"
+                style="position:absolute;left:0;top:0;z-index:2;pointer-events:none;transform:translateZ(0);"></canvas>
 
 
             <!-- Floating HUD -->
@@ -94,7 +78,6 @@
             </div>
 
 
-            <div id="debug" class="fs-debug"></div>
         </div>
     </div>
     <script>window.__NRP__ = '<%= nrp %>';</script>
