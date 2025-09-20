@@ -29,7 +29,8 @@
     const faces = await (await fetch('/api/faces')).json();
     const db = faces.reduce((m, f) => (m[f.nrp] = f.descriptor, m), {});
     const THRESH = (await (await fetch('/api/config')).json()).threshold;
-
+    const empList = await (await fetch('/api/karyawan')).json().catch(() => []);
+    const NAMES = empList.reduce((m, e) => (m[e.nrp] = e.nama, m), {});
 
     async function loop() {
         requestAnimationFrame(loop);
@@ -47,7 +48,9 @@
                 FaceCommon.drawFancyBox(ctx, det.detection.box, ok);
                 if (ok && !saved) {
                     badge.className = 'fs-badge ok';
-                    badge.textContent = `Menyimpan: ${best.nrp} (jarak ${best.dist.toFixed(3)})`;
+                    const nama = (NAMES[best.nrp] || best.nrp).toUpperCase();
+                    badge.textContent = `${nama}`;
+                    //badge.textContent = `Menyimpan: ${best.nrp} (jarak ${best.dist.toFixed(3)})`;
                     saved = true;
                     try {
                         const r = await fetch('/api/absen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nrp: best.nrp, shift: TYPE }) });
